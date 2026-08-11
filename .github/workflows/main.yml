@@ -12,10 +12,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4   # لازم v4
+      uses: actions/checkout@v4
 
     - name: Setup JDK
-      uses: actions/setup-java@v5 # لازم v5
+      uses: actions/setup-java@v5
       with:
         java-version: '17'
         distribution: 'temurin'
