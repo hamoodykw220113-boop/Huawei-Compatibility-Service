@@ -1,33 +1,28 @@
-name: Kotlin CI
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+android {
+    namespace = "com.example.huawei"
+    compileSdk = 34
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+    defaultConfig {
+        applicationId = "com.example.huawei"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
+    }
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+        }
+    }
+}
 
-    - name: Setup JDK
-      uses: actions/setup-java@v5
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-
-    - name: Build with Gradle
-      run: ./gradlew build
-
-    - name: Run Tests
-      run: ./gradlew test
-
-    - name: Upload JAR
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-jar
-        path: build/libs/*.jar
+dependencies {
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+}
